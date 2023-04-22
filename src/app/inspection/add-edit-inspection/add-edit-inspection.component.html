@@ -1,0 +1,25 @@
+<form action="">
+  <div class="mb-3">
+    <div class="row mt-3">
+      <label for="InspectionTypeId" class="form-label">Tipo de Inspección</label>
+      <input type="text" class="form-control" name="InspectionTypeId" [(ngModel)]="inspectionTypesId"   disabled>
+    </div>
+    <div class="row mt-3">
+      <select class="form-control" name="InspectionTypeId"  [(ngModel)]="inspectionTypesId"  id="InspectionTypeId" >
+        <option *ngFor="let type of inspectionTypesList$ |async" [value]="type.id">{{type.inspectionName}}</option>
+
+      </select>
+    </div>
+    <div class="ropw mt-3">
+      <label for="status" class="form-label">Estado</label>
+      <select name="status" class="form-control"  [(ngModel)]="status" id="status">
+        <option *ngFor="let status of statusList$|async" >{{status.statusOption}}</option>
+
+      </select>
+    </div>
+    <div class="row mt-">
+      <label for="comments" class="form-label">Comentario</label>
+      <input type="text" class="form-control" name="comments">
+    </div>
+  </div>
+</form>

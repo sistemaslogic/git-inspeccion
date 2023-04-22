@@ -1,0 +1,5 @@
+#toast-container > .toast-success {
+  background-image: none;
+  background-color: #a52222;
+  color: black;
+}

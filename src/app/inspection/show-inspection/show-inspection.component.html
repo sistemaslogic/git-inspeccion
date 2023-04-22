@@ -1,0 +1,62 @@
+<button type="button" class="btn btn-primary float-end m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="modalAdd()" >
+  Agregar
+</button>
+<button type="button" class="btn btn-success float-end m-2" data-bs-toggle="modal" data-bs-target="#exampleModal" >Mostrar tipo de Inspección</button>
+
+<table class="table table-striped">
+<thead>
+  <th>Id</th>
+  <th>Tipo de Inspección</th>
+  <th>Estado</th>
+  <th>Comentario</th>
+  <th>Opciones</th>
+</thead>
+<tbody>
+  <tr *ngFor="let item of inspectionLis$ | async">
+    <td>{{item.id}}</td>
+    <td>{{item.inspectionTypeId}}</td>
+    <td>{{item.status}}</td>
+    <td>{{item.comments}}</td>
+    <td>
+     <button class="btn btn-outline-primary me-2 mb-1" (click)="modalEdit(item)" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-pencil-square-o"></i></button>
+     <button class="btn btn-outline-danger me-2 mb-1" (click)="delete(item.id)" ><i class="fa fa-trash"></i></button>
+    </td>
+  </tr>
+</tbody>
+</table>
+<div class="alert alert-success" role="alert" id="add-success-alert" style="display: none;" >Inspección creada con exito</div>
+<div class="alert alert-primary" role="alert" id="add-success-alert" style="display: none;">Inspección Actualizada con exito</div>
+<div class="alert alert-danger" role="alert" id="delete-success-alert" style="display: none;">Inspección eliminada con exito</div>
+
+<!-- modal de tipo de inspección -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Tipo de Inspección</h5>
+        <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+      </div>
+      <div class="modal-body">
+        <p *ngFor="let type of inspectionTypesList$ | async">{{type.id}} - {{type.inspectionName
+        }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- modal de de registro -->
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"> {{modaltitle}}</h5>
+        <button type="button" class="btn-close" id="add-edit-modal-close" (click)="modalClose()" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-add-edit-inspection [inspection]="inspection" *ngIf="activateAddInspectionComponent"></app-add-edit-inspection>
+      </div>
+    </div>
+  </div>
+
+</div>
